@@ -1,7 +1,9 @@
-import { FC, PropsWithChildren } from 'react'
+import { ButtonHTMLAttributes, FC, PropsWithChildren } from 'react'
 import cn from 'classnames'
 
-type ButtonProps = PropsWithChildren & {
+type ButtonProps = PropsWithChildren<
+	ButtonHTMLAttributes<HTMLButtonElement>
+> & {
 	option?: 'primary' | 'secondary'
 	size?: 'large' | 'small'
 }
