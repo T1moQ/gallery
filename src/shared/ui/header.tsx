@@ -1,16 +1,19 @@
 import { FC } from 'react'
+import { Button } from './button'
 
 export const Header: FC = () => {
 	return (
-		<header className="py-4 px-6 bg-gradient-to-r from-white to-blue-300">
-			<div className="flex items-center justify-between">
-				<h2 className="font-bold text-5xl">LOGO</h2>
-				<nav className="flex justify-between">
-					<ul className="flex gap-2">
+		<header className="bg-gradient-to-r from-white to-blue-300">
+			<div className="flex items-center justify-between px-6 py-4">
+				<h2 className="font-bold text-7xl">LOGO</h2>
+				<nav className="flex justify-between  text-2xl">
+					<ul className="flex gap-6 items-center">
 						<li>Favorites</li>
 						<li>Search</li>
+						<li>
+							<Button>Add Image</Button>
+						</li>
 						<li>Profile</li>
-						<li>Add</li>
 					</ul>
 				</nav>
 			</div>
