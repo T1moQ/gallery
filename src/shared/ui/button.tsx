@@ -20,7 +20,7 @@ export const Button: FC<ButtonProps> = ({
 				'rounded-3xl flex justify-center items-center border font-semibold',
 				option === 'primary' && 'bg-black text-white border-black shadow-lg',
 				option === 'secondary' &&
-					'bg-transparent text-white border-white shadow-lg',
+					'bg-transparent text-black border-black shadow-lg',
 				{
 					'h-12 py-4 text-2xl px-6': size === 'large',
 

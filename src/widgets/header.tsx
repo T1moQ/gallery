@@ -1,8 +1,8 @@
 import { FC, useState } from 'react'
-import { Button } from './button'
-import { User } from '../icons/user'
-import { Menu } from '../icons/menu'
-import { Close } from '../icons/close'
+import { Button } from '../shared/ui/button'
+import { User } from '../shared/icons/user'
+import { Menu } from '../shared/icons/menu'
+import { Close } from '../shared/icons/close'
 
 export const Header: FC = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)

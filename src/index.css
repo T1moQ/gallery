@@ -1,1 +1,13 @@
 @import 'tailwindcss';
+
+body {
+	@apply min-h-[100svh];
+}
+
+#root {
+	@apply flex flex-col min-h-[100svh];
+}
+
+main {
+	@apply grow max-md:px-4;
+}

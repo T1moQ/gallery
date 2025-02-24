@@ -1,11 +1,12 @@
 import './App.css'
-import { Header } from './shared/ui/header'
+import { Header } from './widgets/header'
+import { Home } from './widgets/home'
 
 function App() {
 	return (
 		<>
 			<Header />
-			<main></main>
+			<Home />
 		</>
 	)
 }
