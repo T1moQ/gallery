@@ -9,5 +9,9 @@ body {
 }
 
 main {
-	@apply grow max-md:px-4;
+	@apply grow;
+}
+
+section {
+	@apply max-md:px-4;
 }

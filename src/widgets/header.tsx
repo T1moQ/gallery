@@ -8,7 +8,7 @@ export const Header: FC = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 
 	return (
-		<header className="bg-gradient-to-r from-white to-blue-300">
+		<header className="bg-gradient-to-r from-white via-blue-50 to-blue-300">
 			<div className="flex items-center justify-between md:px-10 px-2 py-4 relative">
 				<h2 className="font-bold md:text-5xl text-2xl md:py-2">LOGO</h2>
 				<nav className="md:flex hidden justify-between text-2xl">
