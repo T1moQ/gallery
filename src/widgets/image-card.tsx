@@ -2,10 +2,10 @@ import { FC } from 'react'
 
 export const ImageCard: FC = () => {
 	return (
-		<div className="flex flex-col gap-3 rounded-lg shadow-md p-3 w-">
-			<div className="w-[424px]">
+		<div className="flex flex-col gap-3 rounded-lg shadow-lg p-3">
+			<div className="w-[400px]">
 				<img
-					src="../public/img-dummy.jpg"
+					src="../public/img-dummy.png"
 					alt=""
 					className="w-full rounded-md"
 				/>

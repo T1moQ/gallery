@@ -30,7 +30,7 @@ export const Home: FC = () => {
 			</section>
 			<section className="mt-4 md:px-16 flex flex-col gap-4 items-start">
 				<h2 className="md:text-5xl text-2xl">Here might be your images!</h2>
-				<div className="flex justify-between w-full">
+				<div className="flex justify-center gap-4 w-full">
 					<ImageCard />
 					<ImageCard />
 					<ImageCard />
