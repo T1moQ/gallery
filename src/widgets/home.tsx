@@ -1,10 +1,11 @@
 import { FC } from 'react'
 import { Button } from '../shared/ui/button'
+import { ImageCard } from './image-card'
 
 export const Home: FC = () => {
 	return (
-		<main className="">
-			<section className="bg-gradient-to-r from-white via-blue-50 to-blue-300 md:px-10 md:py-3">
+		<main className="flex flex-col">
+			<section className="bg-gradient-to-r from-white via-blue-50 to-blue-300 md:py-3 md:px-16">
 				<div className="flex md:flex-row flex-col items-center md:gap-40 gap-14">
 					<div className="z-0 md:w-[460px] w-64 order-2 md:order-1">
 						<img
@@ -25,6 +26,14 @@ export const Home: FC = () => {
 							Add Your Images
 						</Button>
 					</div>
+				</div>
+			</section>
+			<section className="mt-4 md:px-16 flex flex-col gap-4 items-start">
+				<h2 className="md:text-5xl text-2xl">Here might be your images!</h2>
+				<div className="flex justify-between w-full">
+					<ImageCard />
+					<ImageCard />
+					<ImageCard />
 				</div>
 			</section>
 		</main>
