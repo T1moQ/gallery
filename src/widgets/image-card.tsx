@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { Accordion } from '../shared/ui/accordion'
 
 export const ImageCard: FC = () => {
 	return (
@@ -11,7 +12,10 @@ export const ImageCard: FC = () => {
 				/>
 			</div>
 			<h3 className="text-2xl">Your cool image</h3>
-			<p className="text-lg">Here you can place your images description</p>
+			<Accordion
+				title="Description"
+				text="Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+			/>
 		</div>
 	)
 }
