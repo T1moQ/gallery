@@ -1,8 +1,11 @@
 import { FC } from 'react'
 import { Button } from '../shared/ui/button'
 import { ImageCard } from './image-card'
+import { useModal } from '../shared/hooks/use-modal'
 
 export const Home: FC = () => {
+	const { openModal } = useModal()
+
 	return (
 		<main className="flex flex-col">
 			<section className="bg-gradient-to-r from-white via-blue-50 to-blue-300 md:py-3 md:px-16">
@@ -22,7 +25,11 @@ export const Home: FC = () => {
 							You can read this text, but it doesn’t matter. It’s concept, not
 							important for your life or life your friends
 						</p>
-						<Button size="large" option="secondary">
+						<Button
+							onClick={() => openModal(<>AZAAZA</>)}
+							size="large"
+							option="secondary"
+						>
 							Add Your Images
 						</Button>
 					</div>

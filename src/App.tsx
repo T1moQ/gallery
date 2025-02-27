@@ -1,12 +1,15 @@
 import './App.css'
+import { ModalProvider } from './app/providers/modal-provider'
 import { Header } from './widgets/header'
 import { Home } from './widgets/home'
 
 function App() {
 	return (
 		<>
-			<Header />
-			<Home />
+			<ModalProvider>
+				<Header />
+				<Home />
+			</ModalProvider>
 		</>
 	)
 }
