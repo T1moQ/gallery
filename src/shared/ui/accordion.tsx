@@ -12,7 +12,7 @@ export const Accordion: FC<AccordionProps> = ({ title, text }) => {
 	return (
 		<div className="mt-2">
 			<div className="flex justify-between">
-				<p className="text-xl">{title}</p>
+				<p className="md:text-xl text-lg">{title}</p>
 				<button onClick={() => setIsOpen(!isOpen)}>
 					<Chevrone className={cn(isOpen && 'rotate-180')} />
 				</button>

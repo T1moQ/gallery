@@ -29,8 +29,8 @@ export const Home: FC = () => {
 				</div>
 			</section>
 			<section className="mt-10 md:px-16 flex flex-col gap-6 items-start">
-				<h2 className="md:text-5xl text-2xl">Here might be your images!</h2>
-				<div className="flex justify-center gap-4 w-full">
+				<h2 className="md:text-5xl text-xl">Here might be your images!</h2>
+				<div className="flex md:flex-row flex-col justify-center md:items-start items-center gap-4 w-full">
 					<ImageCard />
 					<ImageCard />
 					<ImageCard />
