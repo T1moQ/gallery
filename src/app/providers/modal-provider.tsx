@@ -6,17 +6,17 @@ import {
 import { Modal } from '../../shared/ui/modal'
 
 export const ModalProvider: FC<PropsWithChildren> = (props) => {
-	const [isModalOpen, setIsModalOpen] = useState<ModalContextType>({
+	const [modalState, setModalState] = useState<ModalContextType>({
 		isOpen: false,
 		children: null,
 	})
 
 	return (
 		<ModalContext.Provider
-			value={{ state: isModalOpen, setState: setIsModalOpen }}
+			value={{ state: modalState, setState: setModalState }}
 		>
 			{props.children}
-			<Modal>{isModalOpen.isOpen && isModalOpen.children}</Modal>
+			{modalState.isOpen && <Modal>{modalState.children}</Modal>}
 		</ModalContext.Provider>
 	)
 }

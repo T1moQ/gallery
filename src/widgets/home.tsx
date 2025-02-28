@@ -6,6 +6,11 @@ import { useModal } from '../shared/hooks/use-modal'
 export const Home: FC = () => {
 	const { openModal } = useModal()
 
+	const handeleClick = () => {
+		openModal(<div>MOdal here azaza</div>)
+		console.log('AZAZAZ')
+	}
+
 	return (
 		<main className="flex flex-col">
 			<section className="bg-gradient-to-r from-white via-blue-50 to-blue-300 md:py-3 md:px-16">
@@ -25,11 +30,7 @@ export const Home: FC = () => {
 							You can read this text, but it doesn’t matter. It’s concept, not
 							important for your life or life your friends
 						</p>
-						<Button
-							onClick={() => openModal(<>AZAAZA</>)}
-							size="large"
-							option="secondary"
-						>
+						<Button onClick={handeleClick} size="large" option="secondary">
 							Add Your Images
 						</Button>
 					</div>

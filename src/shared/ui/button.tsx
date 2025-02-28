@@ -12,6 +12,7 @@ export const Button: FC<ButtonProps> = ({
 	children,
 	option = 'primary',
 	size = 'large',
+	...rest
 }) => {
 	return (
 		<button
@@ -27,6 +28,7 @@ export const Button: FC<ButtonProps> = ({
 					'h-[2.375rem] py-2 text-xl px-3': size === 'small',
 				}
 			)}
+			{...rest}
 		>
 			{children}
 		</button>

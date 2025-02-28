@@ -8,13 +8,17 @@ export const useModal = () => {
 		throw new Error('useModal hook can be called just inside ModalProvider')
 	}
 
+	const openModal = (children: ReactNode) => {
+		modal.setState((prev) => ({ ...prev, isOpen: true, children }))
+	}
+
+	const closeModal = () => {
+		modal.setState((prev) => ({ ...prev, isOpen: false }))
+	}
+
 	return {
 		state: modal.state,
-		openModal: (children: ReactNode) => {
-			modal.setState((prev) => ({ ...prev, isOpen: true, children }))
-		},
-		closeModal: () => {
-			modal.setState((prev) => ({ ...prev, isOpen: false }))
-		},
+		openModal,
+		closeModal,
 	}
 }
