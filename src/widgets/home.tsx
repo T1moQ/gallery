@@ -2,13 +2,13 @@ import { FC } from 'react'
 import { Button } from '../shared/ui/button'
 import { ImageCard } from './image-card'
 import { useModal } from '../shared/hooks/use-modal'
+import { UploaderForm } from './uploader-form'
 
 export const Home: FC = () => {
 	const { openModal } = useModal()
 
 	const handeleClick = () => {
-		openModal(<div>MOdal here azaza</div>)
-		console.log('AZAZAZ')
+		openModal(<UploaderForm />)
 	}
 
 	return (

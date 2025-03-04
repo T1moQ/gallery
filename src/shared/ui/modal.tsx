@@ -14,9 +14,14 @@ export const Modal: FC<PropsWithChildren> = ({ children }) => {
 	if (!state.isOpen) return null
 
 	return createPortal(
-		<div className="fixed inset-0 z-[8999] flex justify-center items-center">
-			<div onClick={onBackdropClick} className="w-full h-screen bg-gray-200/60">
-				<div className="w-32 h-24 bg-white rounded-xl">{children}</div>
+		<div className="fixed inset-0 z-[8999] ">
+			<div
+				onClick={onBackdropClick}
+				className="w-full h-screen bg-gray-400/50 flex justify-center items-center"
+			>
+				<div className="p-4 bg-white rounded-xl flex flex-col max-w-md w-full">
+					{children}
+				</div>
 			</div>
 		</div>,
 		document.body
