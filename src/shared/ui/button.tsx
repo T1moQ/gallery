@@ -18,7 +18,7 @@ export const Button: FC<ButtonProps> = ({
 		<button
 			type="button"
 			className={cn(
-				'rounded-3xl flex justify-center items-center border font-semibold',
+				'rounded-3xl flex justify-center items-center border font-semibold cursor-pointer',
 				option === 'primary' && 'bg-black text-white border-black shadow-lg',
 				option === 'secondary' &&
 					'bg-transparent text-black border-black shadow-lg',
