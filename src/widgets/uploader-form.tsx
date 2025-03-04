@@ -1,4 +1,5 @@
 import { FC, useState } from 'react'
+import { Close } from '../shared/icons/close'
 
 export const UploaderForm: FC = () => {
 	const [preview, setPreview] = useState<string | null>(null)
@@ -21,7 +22,15 @@ export const UploaderForm: FC = () => {
 			<input type="file" onChange={fileChangeHandler} />
 			<div>
 				{preview ? (
-					<img src={preview} />
+					<div className="relative">
+						<button
+							onClick={() => setPreview(null)}
+							className="absolute top-2 right-2 fill-zinc-400 hover:bg-zinc-100/40 rounded-full p-1 cursor-pointer"
+						>
+							<Close />
+						</button>
+						<img src={preview} />
+					</div>
 				) : (
 					<img src="../public/img-dummy.png" />
 				)}
