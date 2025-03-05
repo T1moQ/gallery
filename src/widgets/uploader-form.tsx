@@ -5,6 +5,7 @@ import { Upload } from '../shared/icons/upload'
 
 export const UploaderForm: FC = () => {
 	const [preview, setPreview] = useState<string | null>(null)
+	const [name, setName] = useState<string | null>(null)
 
 	const inputRef = useRef<HTMLInputElement>(null)
 
@@ -14,22 +15,24 @@ export const UploaderForm: FC = () => {
 
 	const fileChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0]
+
 		if (file) {
 			const reader = new FileReader()
 			reader.onloadend = () => {
 				setPreview(reader.result as string)
+				setName(file.name)
 			}
 			reader.readAsDataURL(file)
 		} else {
 			setPreview(null)
+			setName(null)
 		}
 	}
 
 	return (
 		<form className="w-[404px] mt-4 flex flex-col gap-4 items-center justify-center">
-			<Button onClick={buttonClickHandler}>
-				<span>Upload</span>
-				<Upload className="ml-2 !w-6 !h-6" />
+			<Button onClick={buttonClickHandler} size="small" option="secondary">
+				<span>Choose a file</span>
 			</Button>
 			<input
 				ref={inputRef}
@@ -51,6 +54,13 @@ export const UploaderForm: FC = () => {
 				) : (
 					<img src="../public/img-dummy.png" />
 				)}
+			</div>
+			<p>{name}</p>
+			<div className="self-start">
+				<Button type="submit">
+					<span>Upload</span>
+					<Upload className="ml-2 !w-6 !h-6" />
+				</Button>
 			</div>
 		</form>
 	)

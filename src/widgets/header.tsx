@@ -3,9 +3,17 @@ import { Button } from '../shared/ui/button'
 import { User } from '../shared/icons/user'
 import { Menu } from '../shared/icons/menu'
 import { Close } from '../shared/icons/close'
+import { useModal } from '../shared/hooks/use-modal'
+import { UploaderForm } from './uploader-form'
 
 export const Header: FC = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+	const { openModal } = useModal()
+
+	const handeleClick = () => {
+		openModal(<UploaderForm />)
+	}
 
 	return (
 		<header className="bg-gradient-to-r from-white via-blue-50 to-blue-300">
@@ -16,7 +24,9 @@ export const Header: FC = () => {
 						<li>Favorites</li>
 						<li>Search</li>
 						<li>
-							<Button size="large">Add Image</Button>
+							<Button size="large" onClick={handeleClick}>
+								Add Image
+							</Button>
 						</li>
 						<li>
 							<User />
@@ -24,7 +34,9 @@ export const Header: FC = () => {
 					</ul>
 				</nav>
 				<nav className="md:hidden flex items-center gap-4">
-					<Button size="small">Add</Button>
+					<Button size="small" onClick={handeleClick}>
+						Add
+					</Button>
 
 					<button onClick={() => setIsMenuOpen(!isMenuOpen)}>
 						{isMenuOpen ? <Close /> : <Menu />}
