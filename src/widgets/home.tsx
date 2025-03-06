@@ -1,14 +1,20 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Button } from '../shared/ui/button'
 import { ImageCard } from './image-card'
 import { useModal } from '../shared/hooks/use-modal'
 import { UploaderForm } from './uploader-form'
 
+export type ImageData = {
+	preview: string
+	file: File
+}
+
 export const Home: FC = () => {
+	const [uploadedImages, setUploadedImages] = useState<ImageData[]>([])
 	const { openModal } = useModal()
 
 	const handeleClick = () => {
-		openModal(<UploaderForm />)
+		openModal(<UploaderForm onSubmit={(images) => setUploadedImages(images)} />)
 	}
 
 	return (
@@ -39,9 +45,17 @@ export const Home: FC = () => {
 			<section className="mt-10 md:px-16 flex flex-col gap-6 items-start">
 				<h2 className="md:text-5xl text-xl">Here might be your images!</h2>
 				<div className="flex md:flex-row flex-col justify-center md:items-start items-center gap-4 w-full">
-					<ImageCard />
-					<ImageCard />
-					<ImageCard />
+					{uploadedImages.length > 0 ? (
+						uploadedImages.map((image, index) => (
+							<div key={index}>{image.preview}</div>
+						))
+					) : (
+						<>
+							<ImageCard />
+							<ImageCard />
+							<ImageCard />
+						</>
+					)}
 				</div>
 			</section>
 		</main>

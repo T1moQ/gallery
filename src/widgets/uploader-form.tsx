@@ -1,11 +1,15 @@
 import { FC, useRef, useState } from 'react'
+import { ImageData } from './home'
 import { Trash } from '../shared/icons/trash'
 import { Button } from '../shared/ui/button'
 import { Upload } from '../shared/icons/upload'
 
-export const UploaderForm: FC = () => {
+type UpoaderFormProps = {
+	onSubmit?: (images: ImageData[]) => void
+}
+
+export const UploaderForm: FC<UpoaderFormProps> = () => {
 	const [preview, setPreview] = useState<string | null>(null)
-	const [name, setName] = useState<string | null>(null)
 
 	const inputRef = useRef<HTMLInputElement>(null)
 
@@ -14,18 +18,22 @@ export const UploaderForm: FC = () => {
 	}
 
 	const fileChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const file = event.target.files?.[0]
+		const files = event.target.files
 
-		if (file) {
-			const reader = new FileReader()
-			reader.onloadend = () => {
-				setPreview(reader.result as string)
-				setName(file.name)
-			}
-			reader.readAsDataURL(file)
-		} else {
-			setPreview(null)
-			setName(null)
+		if (files) {
+			const newImages: ImageData[] = []
+
+			Array.from(files).forEach((file) => {
+				const reader = new FileReader()
+
+				reader.onloadend = () => {
+					newImages.push({
+						preview: reader.result as string,
+						file,
+					})
+				}
+				reader.readAsDataURL(file)
+			})
 		}
 	}
 
@@ -39,6 +47,8 @@ export const UploaderForm: FC = () => {
 				type="file"
 				onChange={fileChangeHandler}
 				className="hidden"
+				multiple
+				accept="image/*"
 			/>
 			<div>
 				{preview ? (
@@ -55,7 +65,6 @@ export const UploaderForm: FC = () => {
 					<img src="../public/img-dummy.png" />
 				)}
 			</div>
-			<p>{name}</p>
 			<div className="self-start">
 				<Button type="submit">
 					<span>Upload</span>
