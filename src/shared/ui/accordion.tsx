@@ -10,7 +10,7 @@ type AccordionProps = {
 export const Accordion: FC<AccordionProps> = ({ title, text }) => {
 	const [isOpen, setIsOpen] = useState(false)
 	return (
-		<div className="mt-2">
+		<div className="mt-2 w-[400px]">
 			<div className="flex justify-between">
 				<p className="md:text-xl text-lg">{title}</p>
 				<button onClick={() => setIsOpen(!isOpen)}>

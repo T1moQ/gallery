@@ -3,6 +3,7 @@ import { ImageData } from './home'
 import { Trash } from '../shared/icons/trash'
 import { Button } from '../shared/ui/button'
 import { Upload } from '../shared/icons/upload'
+import { useModal } from '../shared/hooks/use-modal'
 
 type UpoaderFormProps = {
 	onSubmit?: (images: ImageData[]) => void
@@ -13,6 +14,8 @@ export const UploaderForm: FC<UpoaderFormProps> = ({ onSubmit }) => {
 	const [files, setFiles] = useState<File[]>([])
 
 	const inputRef = useRef<HTMLInputElement>(null)
+
+	const { closeModal } = useModal()
 
 	const buttonClickHandler = () => {
 		inputRef.current?.click()
@@ -46,6 +49,8 @@ export const UploaderForm: FC<UpoaderFormProps> = ({ onSubmit }) => {
 
 			onSubmit?.(images)
 		}
+
+		closeModal()
 	}
 
 	return (

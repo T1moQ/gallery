@@ -11,10 +11,15 @@ export type ImageData = {
 
 export const Home: FC = () => {
 	const [uploadedImages, setUploadedImages] = useState<ImageData[]>([])
+	const [isSlideShowOpen, setIsSlideShowOpen] = useState(false)
 	const { openModal } = useModal()
 
 	const handeleClick = () => {
 		openModal(<UploaderForm onSubmit={(images) => setUploadedImages(images)} />)
+	}
+
+	const slideShowHandler = () => {
+		setIsSlideShowOpen(!isSlideShowOpen)
 	}
 
 	return (
@@ -47,8 +52,13 @@ export const Home: FC = () => {
 				<div className="flex md:flex-row flex-col justify-center md:items-start items-center gap-4 w-full">
 					{uploadedImages.length > 0 ? (
 						uploadedImages.map((image, index) => (
-							<div key={index}>
-								<img src={image.preview} alt="" />
+							<div
+								key={index}
+								className="border-2 border-gray-300 p-4 rounded-xl"
+							>
+								<button onClick={slideShowHandler}>
+									<img src={image.preview} alt="" />
+								</button>
 							</div>
 						))
 					) : (
