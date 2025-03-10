@@ -8,8 +8,9 @@ type UpoaderFormProps = {
 	onSubmit?: (images: ImageData[]) => void
 }
 
-export const UploaderForm: FC<UpoaderFormProps> = () => {
+export const UploaderForm: FC<UpoaderFormProps> = ({ onSubmit }) => {
 	const [preview, setPreview] = useState<string | null>(null)
+	const [files, setFiles] = useState<File[]>([])
 
 	const inputRef = useRef<HTMLInputElement>(null)
 
@@ -18,27 +19,40 @@ export const UploaderForm: FC<UpoaderFormProps> = () => {
 	}
 
 	const fileChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const files = event.target.files
+		const selectedFiles = event.target.files
 
-		if (files) {
-			const newImages: ImageData[] = []
+		if (selectedFiles && selectedFiles.length > 0) {
+			const file = selectedFiles[0]
+			setFiles(Array.from(selectedFiles))
 
-			Array.from(files).forEach((file) => {
-				const reader = new FileReader()
+			const reader = new FileReader()
 
-				reader.onloadend = () => {
-					newImages.push({
-						preview: reader.result as string,
-						file,
-					})
-				}
-				reader.readAsDataURL(file)
-			})
+			reader.onloadend = () => {
+				setPreview(reader.result as string)
+			}
+
+			reader.readAsDataURL(file)
+		}
+	}
+
+	const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault()
+
+		if (files.length > 0) {
+			const images: ImageData[] = files.map((file) => ({
+				file: file,
+				preview: URL.createObjectURL(file),
+			}))
+
+			onSubmit?.(images)
 		}
 	}
 
 	return (
-		<form className="w-[404px] mt-4 flex flex-col gap-4 items-center justify-center">
+		<form
+			onSubmit={submitHandler}
+			className="w-[404px] mt-4 flex flex-col gap-4 items-center justify-center"
+		>
 			<Button onClick={buttonClickHandler} size="small" option="secondary">
 				<span>Choose a file</span>
 			</Button>

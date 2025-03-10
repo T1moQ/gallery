@@ -47,7 +47,9 @@ export const Home: FC = () => {
 				<div className="flex md:flex-row flex-col justify-center md:items-start items-center gap-4 w-full">
 					{uploadedImages.length > 0 ? (
 						uploadedImages.map((image, index) => (
-							<div key={index}>{image.preview}</div>
+							<div key={index}>
+								<img src={image.preview} alt="" />
+							</div>
 						))
 					) : (
 						<>
