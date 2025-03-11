@@ -10,7 +10,7 @@ type UpoaderFormProps = {
 }
 
 export const UploaderForm: FC<UpoaderFormProps> = ({ onSubmit }) => {
-	const [preview, setPreview] = useState<string | null>(null)
+	const [previews, setPreviews] = useState<string[]>([])
 	const [files, setFiles] = useState<File[]>([])
 
 	const inputRef = useRef<HTMLInputElement>(null)
@@ -25,26 +25,42 @@ export const UploaderForm: FC<UpoaderFormProps> = ({ onSubmit }) => {
 		const selectedFiles = event.target.files
 
 		if (selectedFiles && selectedFiles.length > 0) {
-			const file = selectedFiles[0]
-			setFiles(Array.from(selectedFiles))
+			const filesArray = Array.from(selectedFiles)
+			setFiles(filesArray)
 
-			const reader = new FileReader()
+			const previewsArray: string[] = []
+			filesArray.forEach((file) => {
+				const reader = new FileReader()
+				reader.onloadend = () => {
+					previewsArray.push(reader.result as string)
+				}
 
-			reader.onloadend = () => {
-				setPreview(reader.result as string)
-			}
+				if (previewsArray.length === filesArray.length) {
+					setPreviews(previewsArray)
+				}
 
-			reader.readAsDataURL(file)
+				reader.readAsDataURL(file)
+			})
 		}
+	}
+
+	const removePreview = (index: number) => {
+		const newPreviews = [...previews]
+		newPreviews.splice(index, 1)
+		setPreviews(newPreviews)
+
+		const newFiles = [...files]
+		newFiles.splice(index, 1)
+		setFiles(newFiles)
 	}
 
 	const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
 
 		if (files.length > 0) {
-			const images: ImageData[] = files.map((file) => ({
+			const images: ImageData[] = files.map((file, index) => ({
 				file: file,
-				preview: URL.createObjectURL(file),
+				preview: previews[index],
 			}))
 
 			onSubmit?.(images)
@@ -66,11 +82,22 @@ export const UploaderForm: FC<UpoaderFormProps> = ({ onSubmit }) => {
 				type="file"
 				onChange={fileChangeHandler}
 				className="hidden"
-				multiple
 				accept="image/*"
+				multiple
 			/>
-			<div>
-				{preview ? (
+			<div className="w-full flex gap-3">
+				{previews.map((preview, index) => (
+					<div className="relative" key={index}>
+						<button
+							onClick={() => removePreview(index)}
+							className="absolute top-2 right-2 fill-zinc-400 hover:bg-zinc-100/40 rounded-full p-1 cursor-pointer"
+						>
+							<Trash />
+						</button>
+						<img src={preview} />
+					</div>
+				))}
+				{/* {previews ? (
 					<div className="relative">
 						<button
 							onClick={() => setPreview(null)}
@@ -82,7 +109,7 @@ export const UploaderForm: FC<UpoaderFormProps> = ({ onSubmit }) => {
 					</div>
 				) : (
 					<img src="../public/img-dummy.png" />
-				)}
+				)} */}
 			</div>
 			<div className="self-start">
 				<Button type="submit">
