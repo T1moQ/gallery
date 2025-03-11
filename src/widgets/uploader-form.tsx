@@ -28,18 +28,18 @@ export const UploaderForm: FC<UpoaderFormProps> = ({ onSubmit }) => {
 			const filesArray = Array.from(selectedFiles)
 			setFiles(filesArray)
 
-			const previewsArray: string[] = []
-			filesArray.forEach((file) => {
-				const reader = new FileReader()
-				reader.onloadend = () => {
-					previewsArray.push(reader.result as string)
-				}
+			const previewPromises = filesArray.map((file) => {
+				return new Promise<string>((resolve) => {
+					const reader = new FileReader()
+					reader.onloadend = () => {
+						resolve(reader.result as string)
+					}
+					reader.readAsDataURL(file)
+				})
+			})
 
-				if (previewsArray.length === filesArray.length) {
-					setPreviews(previewsArray)
-				}
-
-				reader.readAsDataURL(file)
+			Promise.all(previewPromises).then((previewsArray) => {
+				setPreviews(previewsArray)
 			})
 		}
 	}
@@ -65,7 +65,6 @@ export const UploaderForm: FC<UpoaderFormProps> = ({ onSubmit }) => {
 
 			onSubmit?.(images)
 		}
-
 		closeModal()
 	}
 
@@ -97,19 +96,6 @@ export const UploaderForm: FC<UpoaderFormProps> = ({ onSubmit }) => {
 						<img src={preview} />
 					</div>
 				))}
-				{/* {previews ? (
-					<div className="relative">
-						<button
-							onClick={() => setPreview(null)}
-							className="absolute top-2 right-2 fill-zinc-400 hover:bg-zinc-100/40 rounded-full p-1 cursor-pointer"
-						>
-							<Trash />
-						</button>
-						<img src={preview} />
-					</div>
-				) : (
-					<img src="../public/img-dummy.png" />
-				)} */}
 			</div>
 			<div className="self-start">
 				<Button type="submit">

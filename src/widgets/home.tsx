@@ -23,7 +23,7 @@ export const Home: FC = () => {
 	}
 
 	return (
-		<main className="flex flex-col">
+		<main className="flex flex-col mb-10">
 			<section className="bg-gradient-to-r from-white via-blue-50 to-blue-300 md:py-3 md:px-16">
 				<div className="flex md:flex-row flex-col items-center md:gap-40 gap-14">
 					<div className="z-0 md:w-[460px] w-64 order-2 md:order-1">

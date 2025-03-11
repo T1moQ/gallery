@@ -13,7 +13,7 @@ export const Accordion: FC<AccordionProps> = ({ title, text }) => {
 		<div className="mt-2 w-[400px]">
 			<div className="flex justify-between">
 				<p className="md:text-xl text-lg">{title}</p>
-				<button onClick={() => setIsOpen(!isOpen)}>
+				<button onClick={() => setIsOpen(!isOpen)} className="cursor-pointer">
 					<Chevrone className={cn(isOpen && 'rotate-180')} />
 				</button>
 			</div>
