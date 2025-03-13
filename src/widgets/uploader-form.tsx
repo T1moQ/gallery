@@ -84,7 +84,7 @@ export const UploaderForm: FC<UpoaderFormProps> = ({ onSubmit }) => {
 				accept="image/*"
 				multiple
 			/>
-			<div className="w-full flex gap-3">
+			<div className="w-full flex flex-wrap gap-3 items-center px-3">
 				{previews.map((preview, index) => (
 					<div className="relative" key={index}>
 						<button
@@ -93,7 +93,9 @@ export const UploaderForm: FC<UpoaderFormProps> = ({ onSubmit }) => {
 						>
 							<Trash />
 						</button>
-						<img src={preview} />
+						<div className="w-28 h-28 border rounded-xl p-3 border-zinc-400">
+							<img src={preview} className="aspect-square" />
+						</div>
 					</div>
 				))}
 			</div>
