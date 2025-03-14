@@ -11,16 +11,16 @@ export type ImageData = {
 
 export const Home: FC = () => {
 	const [uploadedImages, setUploadedImages] = useState<ImageData[]>([])
-	const [isSlideShowOpen, setIsSlideShowOpen] = useState(false)
+	// const [isSlideShowOpen, setIsSlideShowOpen] = useState(false)
 	const { openModal } = useModal()
 
 	const handeleClick = () => {
 		openModal(<UploaderForm onSubmit={(images) => setUploadedImages(images)} />)
 	}
 
-	const slideShowHandler = () => {
-		setIsSlideShowOpen(!isSlideShowOpen)
-	}
+	// const slideShowHandler = () => {
+	// 	setIsSlideShowOpen(!isSlideShowOpen)
+	// }
 
 	return (
 		<main className="flex flex-col mb-10">
@@ -49,16 +49,11 @@ export const Home: FC = () => {
 			</section>
 			<section className="mt-10 md:px-16 flex flex-col gap-6 items-start">
 				<h2 className="md:text-5xl text-xl">Here might be your images!</h2>
-				<div className="flex md:flex-row flex-col justify-center md:items-start items-center gap-4 w-full">
+				<div className="flex md:flex-row md:flex-wrap flex-col justify-center md:items-start items-center gap-4 w-full">
 					{uploadedImages.length > 0 ? (
 						uploadedImages.map((image, index) => (
-							<div
-								key={index}
-								className="border-2 border-gray-300 p-4 rounded-xl"
-							>
-								<button onClick={slideShowHandler}>
-									<img src={image.preview} alt="" />
-								</button>
+							<div key={index}>
+								<ImageCard src={image.preview} />
 							</div>
 						))
 					) : (
