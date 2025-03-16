@@ -5,6 +5,7 @@ import { Menu } from '../shared/icons/menu'
 import { Close } from '../shared/icons/close'
 import { useModal } from '../shared/hooks/use-modal'
 import { UploaderForm } from './uploader-form'
+import { Logo } from '../shared/icons/logo'
 
 export const Header: FC = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -18,7 +19,9 @@ export const Header: FC = () => {
 	return (
 		<header className="bg-gradient-to-r from-white via-blue-50 to-blue-300">
 			<div className="flex items-center justify-between md:px-16 px-2 py-4 relative">
-				<h2 className="font-bold md:text-5xl text-2xl md:py-2">LOGO</h2>
+				<div>
+					<Logo />
+				</div>
 				<nav className="md:flex hidden justify-between text-2xl">
 					<ul className="flex gap-6 items-center">
 						<li>Favorites</li>
