@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { Button } from '../shared/ui/button'
 import { ImageCard } from './image-card'
 import { useModal } from '../shared/hooks/use-modal'
@@ -6,17 +6,53 @@ import { UploaderForm } from './uploader-form'
 
 export type ImageData = {
 	preview: string
-	file: File
 }
 
 export const Home: FC = () => {
 	const [uploadedImages, setUploadedImages] = useState<ImageData[]>([])
+	const [isLoading, setIsLoading] = useState(true)
 	// const [isSlideShowOpen, setIsSlideShowOpen] = useState(false)
 	const { openModal } = useModal()
 
 	const handeleClick = () => {
-		openModal(<UploaderForm onSubmit={(images) => setUploadedImages(images)} />)
+		openModal(
+			<UploaderForm
+				onSubmit={(images) => {
+					console.log('New images uploaded:', images)
+					setUploadedImages((prev) => [...prev, ...images])
+				}}
+			/>
+		)
 	}
+
+	useEffect(() => {
+		const savedImages = localStorage.getItem('uploadedImages')
+
+		if (savedImages) {
+			try {
+				const parsedImages = JSON.parse(savedImages)
+				if (Array.isArray(parsedImages)) {
+					console.log('Loaded from localStorage:', parsedImages)
+					setUploadedImages(parsedImages)
+				} else {
+					console.error('Invalid data in localStorage')
+					localStorage.removeItem('uploadedImages')
+				}
+			} catch (error) {
+				console.error('Failed to parse images from localStorage:', error)
+				localStorage.removeItem('uploadedImages')
+			}
+		}
+
+		setIsLoading(false)
+	}, [])
+
+	useEffect(() => {
+		if (uploadedImages.length > 0) {
+			console.log('Saving to localStorage:', uploadedImages)
+			localStorage.setItem('uploadedImages', JSON.stringify(uploadedImages))
+		}
+	}, [uploadedImages])
 
 	// const slideShowHandler = () => {
 	// 	setIsSlideShowOpen(!isSlideShowOpen)
@@ -49,21 +85,25 @@ export const Home: FC = () => {
 			</section>
 			<section className="mt-10 md:px-16 flex flex-col gap-6 items-start">
 				<h2 className="md:text-5xl text-xl">Here might be your images!</h2>
-				<div className="flex md:flex-row md:flex-wrap flex-col justify-center md:items-start items-center gap-4 w-full">
-					{uploadedImages.length > 0 ? (
-						uploadedImages.map((image, index) => (
-							<div key={index}>
-								<ImageCard src={image.preview} />
-							</div>
-						))
-					) : (
-						<>
-							<ImageCard />
-							<ImageCard />
-							<ImageCard />
-						</>
-					)}
-				</div>
+				{isLoading ? (
+					<p>Loading...</p>
+				) : (
+					<div className="flex md:flex-row md:flex-wrap flex-col justify-center md:items-start items-center gap-4 w-full">
+						{uploadedImages.length > 0 ? (
+							uploadedImages.map((image, index) => (
+								<div key={index}>
+									<ImageCard src={image.preview} />
+								</div>
+							))
+						) : (
+							<>
+								<ImageCard />
+								<ImageCard />
+								<ImageCard />
+							</>
+						)}
+					</div>
+				)}
 			</section>
 		</main>
 	)

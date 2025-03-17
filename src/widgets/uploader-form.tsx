@@ -11,7 +11,6 @@ type UpoaderFormProps = {
 
 export const UploaderForm: FC<UpoaderFormProps> = ({ onSubmit }) => {
 	const [previews, setPreviews] = useState<string[]>([])
-	const [files, setFiles] = useState<File[]>([])
 
 	const inputRef = useRef<HTMLInputElement>(null)
 
@@ -26,7 +25,6 @@ export const UploaderForm: FC<UpoaderFormProps> = ({ onSubmit }) => {
 
 		if (selectedFiles && selectedFiles.length > 0) {
 			const filesArray = Array.from(selectedFiles)
-			setFiles(filesArray)
 
 			const previewPromises = filesArray.map((file) => {
 				return new Promise<string>((resolve) => {
@@ -48,19 +46,14 @@ export const UploaderForm: FC<UpoaderFormProps> = ({ onSubmit }) => {
 		const newPreviews = [...previews]
 		newPreviews.splice(index, 1)
 		setPreviews(newPreviews)
-
-		const newFiles = [...files]
-		newFiles.splice(index, 1)
-		setFiles(newFiles)
 	}
 
 	const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
 
-		if (files.length > 0) {
-			const images: ImageData[] = files.map((file, index) => ({
-				file: file,
-				preview: previews[index],
+		if (previews.length > 0) {
+			const images: ImageData[] = previews.map((preview) => ({
+				preview: preview,
 			}))
 
 			onSubmit?.(images)
