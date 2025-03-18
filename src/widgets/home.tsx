@@ -92,7 +92,15 @@ export const Home: FC = () => {
 						{uploadedImages.length > 0 ? (
 							uploadedImages.map((image, index) => (
 								<div key={index}>
-									<ImageCard src={image.preview} />
+									<ImageCard
+										src={image.preview}
+										onDescriptionChange={(newDescription) => {
+											console.log(newDescription)
+										}}
+										onTitleChange={(newTitle) => {
+											console.log(newTitle)
+										}}
+									/>
 								</div>
 							))
 						) : (

@@ -1,21 +1,45 @@
 import { FC, useState } from 'react'
-import { Accordion } from '../shared/ui/accordion'
 import dummyImage from '../../public/img-dummy.png'
 import { Edit } from '../shared/icons/edit'
+import cn from 'classnames'
 
 type ImageCardProps = {
 	src?: string
+	onTitleChange?: (title: string) => void
+	onDescriptionChange?: (description: string) => void
 }
 
-export const ImageCard: FC<ImageCardProps> = ({ src }) => {
-	const [isEdit, setIsEdit] = useState(false)
+export const ImageCard: FC<ImageCardProps> = ({
+	src,
+	onDescriptionChange,
+	onTitleChange,
+}) => {
+	const [isTitleEdit, setIsTitleEdit] = useState(false)
+	const [isDescriptionEdit, setisDescriptionEdit] = useState(false)
 	const [title, setTitle] = useState('Your Cool Title')
-	const titleEditHandler = () => {
-		setIsEdit(!isEdit)
-	}
+	const [description, setDescription] = useState(
+		'Here might be your description'
+	)
 
 	const titleCahngeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setTitle(event.target.value)
+		const newTitle = event.target.value
+		setTitle(newTitle)
+		if (onTitleChange) onTitleChange(newTitle)
+	}
+	const descriptionCahngeHandler = (
+		event: React.ChangeEvent<HTMLInputElement>
+	) => {
+		const newDescription = event.target.value
+		setDescription(newDescription)
+		if (onDescriptionChange) onDescriptionChange(newDescription)
+	}
+
+	const handleTitleEdit = () => {
+		setIsTitleEdit(!isTitleEdit)
+	}
+
+	const handleDescriptionEdit = () => {
+		setisDescriptionEdit(!isDescriptionEdit)
 	}
 
 	return (
@@ -28,25 +52,36 @@ export const ImageCard: FC<ImageCardProps> = ({ src }) => {
 				/>
 			</div>
 			<div className="flex items-center gap-2">
-				{isEdit ? (
+				{isTitleEdit ? (
 					<input
 						type="text"
 						onChange={titleCahngeHandler}
 						defaultValue={title}
-						className="md:text-2xl"
+						className={cn('md:text-2xl outline-none border-b border-zinc-700')}
 					/>
 				) : (
 					<h3 className="md:text-2xl text-xl">{title}</h3>
 				)}
 
-				<button onClick={titleEditHandler} className="cursor-pointer">
+				<button onClick={handleTitleEdit} className="cursor-pointer">
 					<Edit className="!w-7 !h-7" />
 				</button>
 			</div>
-			<Accordion
-				title="Description"
-				text="Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-			/>
+			<div className="flex items-center gap-2">
+				{isDescriptionEdit ? (
+					<input
+						type="text"
+						onChange={descriptionCahngeHandler}
+						defaultValue={description}
+						className={cn('md:text-2xl outline-none border-b border-zinc-700')}
+					/>
+				) : (
+					<p className="md:text-xl text-lg italic">{description}</p>
+				)}
+				<button onClick={handleDescriptionEdit} className="cursor-pointer">
+					<Edit className="!w-7 !h-7" />
+				</button>
+			</div>
 		</div>
 	)
 }
