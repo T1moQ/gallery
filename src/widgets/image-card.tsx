@@ -42,12 +42,13 @@ export const ImageCard: FC<ImageCardProps> = ({
 
 	return (
 		<div className="flex flex-col gap-3 rounded-lg shadow-lg p-3">
-			<div className="md:w-[400px] md:h-[440px] w-72 h-80 overflow-hidden">
+			<div className="md:w-[400px] md:h-[440px] w-72 h-80 overflow-hidden relative group">
 				<img
 					src={src || dummyImage}
 					alt=""
-					className="w-full h-full object-cover rounded-md"
+					className="w-full h-full object-cover rounded-md transition-opacity duration-300 group-hover:opacity-70"
 				/>
+				<div className="absolute inset-0 w-full h-full bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
 			</div>
 			<div className="flex items-center gap-2">
 				{isTitleEdit ? (
