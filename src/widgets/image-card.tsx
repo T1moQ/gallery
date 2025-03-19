@@ -2,11 +2,13 @@ import { FC, useState } from 'react'
 import dummyImage from '../../public/img-dummy.png'
 import { Edit } from '../shared/icons/edit'
 import cn from 'classnames'
+import { Trash } from '../shared/icons/trash'
 
 type ImageCardProps = {
 	src?: string
 	title?: string
 	description?: string
+	onDelete?: () => void
 	onTitleChange?: (title: string) => void
 	onDescriptionChange?: (description: string) => void
 }
@@ -15,6 +17,7 @@ export const ImageCard: FC<ImageCardProps> = ({
 	src,
 	title = 'Your Cool Title',
 	description = 'Here might be your description',
+	onDelete,
 	onDescriptionChange,
 	onTitleChange,
 }) => {
@@ -30,6 +33,10 @@ export const ImageCard: FC<ImageCardProps> = ({
 	) => {
 		const newDescription = event.target.value
 		if (onDescriptionChange) onDescriptionChange(newDescription)
+	}
+
+	const handelrDeleteImage = () => {
+		onDelete?.()
 	}
 
 	const handleTitleEdit = () => {
@@ -48,7 +55,14 @@ export const ImageCard: FC<ImageCardProps> = ({
 					alt=""
 					className="w-full h-full object-cover rounded-md transition-opacity duration-300 group-hover:opacity-70"
 				/>
-				<div className="absolute inset-0 w-full h-full bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+				<div className="absolute inset-0 w-full h-full bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex justify-between items-center gap-4">
+					<button
+						onClick={handelrDeleteImage}
+						className="absolute top-2 right-2 cursor-pointer border border-white p-1 rounded-full hover:bg-zinc-700 hover:border-zinc-700"
+					>
+						<Trash className="!w-7 !h-7 fill-white" />
+					</button>
+				</div>
 			</div>
 			<div className="flex items-center gap-2">
 				{isTitleEdit ? (

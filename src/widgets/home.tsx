@@ -103,6 +103,11 @@ export const Home: FC = () => {
 											updatedImages[index].title = newTitle
 											setUploadedImages(updatedImages)
 										}}
+										onDelete={() => {
+											const updatedImages = [...uploadedImages]
+											updatedImages.splice(index, 1)
+											setUploadedImages(updatedImages)
+										}}
 									/>
 								</div>
 							))
