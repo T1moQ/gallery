@@ -69,7 +69,7 @@ export const ImageCard: FC<ImageCardProps> = ({
 					<input
 						type="text"
 						onChange={titleCahngeHandler}
-						defaultValue={title}
+						value={title}
 						className={cn('md:text-2xl outline-none border-b border-zinc-700')}
 					/>
 				) : (
@@ -85,7 +85,7 @@ export const ImageCard: FC<ImageCardProps> = ({
 					<input
 						type="text"
 						onChange={descriptionCahngeHandler}
-						defaultValue={description}
+						value={description}
 						className={cn('md:text-2xl outline-none border-b border-zinc-700')}
 					/>
 				) : (

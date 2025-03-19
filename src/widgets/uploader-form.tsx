@@ -54,7 +54,6 @@ export const UploaderForm: FC<UpoaderFormProps> = ({ onSubmit }) => {
 		if (previews.length > 0) {
 			const images: ImageData[] = previews.map((preview) => ({
 				preview: preview,
-				title: '',
 			}))
 
 			onSubmit?.(images)

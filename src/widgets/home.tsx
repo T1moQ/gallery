@@ -107,6 +107,10 @@ export const Home: FC = () => {
 											const updatedImages = [...uploadedImages]
 											updatedImages.splice(index, 1)
 											setUploadedImages(updatedImages)
+
+											if (uploadedImages.length === 1) {
+												localStorage.clear()
+											}
 										}}
 									/>
 								</div>
