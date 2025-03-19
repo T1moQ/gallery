@@ -5,32 +5,30 @@ import cn from 'classnames'
 
 type ImageCardProps = {
 	src?: string
+	title?: string
+	description?: string
 	onTitleChange?: (title: string) => void
 	onDescriptionChange?: (description: string) => void
 }
 
 export const ImageCard: FC<ImageCardProps> = ({
 	src,
+	title = 'Your Cool Title',
+	description = 'Here might be your description',
 	onDescriptionChange,
 	onTitleChange,
 }) => {
 	const [isTitleEdit, setIsTitleEdit] = useState(false)
 	const [isDescriptionEdit, setisDescriptionEdit] = useState(false)
-	const [title, setTitle] = useState('Your Cool Title')
-	const [description, setDescription] = useState(
-		'Here might be your description'
-	)
 
 	const titleCahngeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const newTitle = event.target.value
-		setTitle(newTitle)
 		if (onTitleChange) onTitleChange(newTitle)
 	}
 	const descriptionCahngeHandler = (
 		event: React.ChangeEvent<HTMLInputElement>
 	) => {
 		const newDescription = event.target.value
-		setDescription(newDescription)
 		if (onDescriptionChange) onDescriptionChange(newDescription)
 	}
 

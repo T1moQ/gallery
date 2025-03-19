@@ -6,12 +6,13 @@ import { UploaderForm } from './uploader-form'
 
 export type ImageData = {
 	preview: string
+	title?: string
+	description?: string
 }
 
 export const Home: FC = () => {
 	const [uploadedImages, setUploadedImages] = useState<ImageData[]>([])
 	const [isLoading, setIsLoading] = useState(true)
-	// const [isSlideShowOpen, setIsSlideShowOpen] = useState(false)
 	const { openModal } = useModal()
 
 	const handeleClick = () => {
@@ -54,10 +55,6 @@ export const Home: FC = () => {
 		}
 	}, [uploadedImages])
 
-	// const slideShowHandler = () => {
-	// 	setIsSlideShowOpen(!isSlideShowOpen)
-	// }
-
 	return (
 		<main className="flex flex-col mb-10">
 			<section className="bg-gradient-to-r from-white via-blue-50 to-blue-300 md:py-3 md:px-16">
@@ -94,11 +91,17 @@ export const Home: FC = () => {
 								<div key={index}>
 									<ImageCard
 										src={image.preview}
+										title={image.title}
+										description={image.description}
 										onDescriptionChange={(newDescription) => {
-											console.log(newDescription)
+											const updatedImages = [...uploadedImages]
+											updatedImages[index].description = newDescription
+											setUploadedImages(updatedImages)
 										}}
 										onTitleChange={(newTitle) => {
-											console.log(newTitle)
+											const updatedImages = [...uploadedImages]
+											updatedImages[index].title = newTitle
+											setUploadedImages(updatedImages)
 										}}
 									/>
 								</div>
