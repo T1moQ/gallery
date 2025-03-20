@@ -64,7 +64,7 @@ export const UploaderForm: FC<UpoaderFormProps> = ({ onSubmit }) => {
 	return (
 		<form
 			onSubmit={submitHandler}
-			className="w-[404px] mt-4 flex flex-col gap-4 items-center justify-center"
+			className="md:w-[404px] w-full md:mt-4 mt-8 flex flex-col md:gap-4 gap-8 items-center justify-center"
 		>
 			<Button onClick={buttonClickHandler} size="small" option="secondary">
 				<span>Choose a file</span>
