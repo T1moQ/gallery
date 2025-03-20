@@ -18,11 +18,11 @@ export const Header: FC = () => {
 
 	return (
 		<header className="bg-gradient-to-r from-white via-blue-50 to-blue-300">
-			<div className="flex items-center justify-between md:px-16 px-2 py-4 relative">
+			<div className="flex items-center justify-between md:px-16 px-2 md:py-4 py-2 relative">
 				<div>
 					<Logo />
 				</div>
-				<nav className="md:flex hidden justify-between text-2xl">
+				<nav className="md:flex hidden justify-between md:text-2xl text-lg">
 					<ul className="flex gap-6 items-center">
 						<li>Favorites</li>
 						<li>Search</li>
@@ -47,10 +47,12 @@ export const Header: FC = () => {
 				</nav>
 			</div>
 			{isMenuOpen && (
-				<div className="md:hidden absolute z-0 right-0 p-2 bg-blue-300 rounded-bl-md">
-					<ul className="flex gap-3 flex-col items-start">
+				<div className="md:hidden absolute z-0 right-0 top-[72px] p-2 bg-blue-300 rounded-xl w-[50svw] h-[25svh] ">
+					<ul className="mt-6 flex gap-3 flex-col items-center text-xl">
 						<li>Favorites</li>
+						<li className="h-[1px] w-full bg-black/50"></li>
 						<li>Search</li>
+						<li className="h-[1px] w-full bg-black/50"></li>
 						<li>Profile</li>
 					</ul>
 				</div>

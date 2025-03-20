@@ -3,6 +3,7 @@ import dummyImage from '../../public/img-dummy.png'
 import { Edit } from '../shared/icons/edit'
 import cn from 'classnames'
 import { Trash } from '../shared/icons/trash'
+import { useModal } from '../shared/hooks/use-modal'
 
 type ImageCardProps = {
 	src?: string
@@ -23,6 +24,8 @@ export const ImageCard: FC<ImageCardProps> = ({
 }) => {
 	const [isTitleEdit, setIsTitleEdit] = useState(false)
 	const [isDescriptionEdit, setisDescriptionEdit] = useState(false)
+
+	const { openModal } = useModal()
 
 	const titleCahngeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const newTitle = event.target.value
@@ -47,13 +50,17 @@ export const ImageCard: FC<ImageCardProps> = ({
 		setisDescriptionEdit(!isDescriptionEdit)
 	}
 
+	const viewSlideshowHandler = () => {
+		openModal(<img src={src} />)
+	}
+
 	return (
-		<div className="flex flex-col gap-3 rounded-lg shadow-lg p-3">
-			<div className="md:w-[400px] md:h-[440px] w-72 h-80 overflow-hidden relative group">
+		<div className="md:w-[400px] md:h-[420px] w-72 h-80 flex flex-col gap-3 rounded-lg shadow-lg p-3">
+			<div className="overflow-hidden relative group">
 				<img
 					src={src || dummyImage}
 					alt=""
-					className="w-full h-full object-cover rounded-md transition-opacity duration-300 group-hover:opacity-70"
+					className="w-full h-full object-contain rounded-md transition-opacity duration-300 group-hover:opacity-70"
 				/>
 				<div className="absolute inset-0 w-full h-full bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex justify-between items-center gap-4">
 					<button
@@ -61,6 +68,12 @@ export const ImageCard: FC<ImageCardProps> = ({
 						className="absolute top-2 right-2 cursor-pointer border border-white p-1 rounded-full hover:bg-zinc-700 hover:border-zinc-700"
 					>
 						<Trash className="!w-7 !h-7 fill-white" />
+					</button>
+					<button
+						onClick={viewSlideshowHandler}
+						className="cursor-pointer text-white"
+					>
+						Full Screen
 					</button>
 				</div>
 			</div>
@@ -80,7 +93,7 @@ export const ImageCard: FC<ImageCardProps> = ({
 					<Edit className="!w-7 !h-7" />
 				</button>
 			</div>
-			<div className="flex items-center gap-2">
+			<div className="w-auto flex items-center gap-2">
 				{isDescriptionEdit ? (
 					<input
 						type="text"
