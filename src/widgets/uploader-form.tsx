@@ -82,12 +82,12 @@ export const UploaderForm: FC<UpoaderFormProps> = ({ onSubmit }) => {
 					<div className="relative" key={index}>
 						<button
 							onClick={() => removePreview(index)}
-							className="absolute top-2 right-2 fill-zinc-400 hover:bg-zinc-100/40 rounded-full p-1 cursor-pointer"
+							className="absolute md:top-2 md:right-2 top-0 right-0.5 fill-zinc-400 hover:bg-zinc-100/40 rounded-full p-1 cursor-pointer"
 						>
-							<Trash />
+							<Trash className="!w-4 !h-4" />
 						</button>
-						<div className="w-28 h-28 border rounded-xl p-3 border-zinc-400">
-							<img src={preview} className="aspect-square" />
+						<div className="md:w-28 md:h-28 w-20 h-20 border rounded-xl md:p-3 p-1.5 border-zinc-400">
+							<img src={preview} className="w-full h-full object-contain" />
 						</div>
 					</div>
 				))}
