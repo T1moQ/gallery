@@ -3,6 +3,7 @@ import { Button } from '../shared/ui/button'
 import { ImageCard } from './image-card'
 import { useModal } from '../shared/hooks/use-modal'
 import { UploaderForm } from './uploader-form'
+import { Slideshow } from './Slideshow'
 
 export type ImageData = {
 	preview: string
@@ -13,7 +14,7 @@ export type ImageData = {
 export const Home: FC = () => {
 	const [uploadedImages, setUploadedImages] = useState<ImageData[]>([])
 	const [isLoading, setIsLoading] = useState(true)
-	const { openModal } = useModal()
+	const { openModal, closeModal } = useModal()
 
 	const handeleClick = () => {
 		openModal(
@@ -54,6 +55,16 @@ export const Home: FC = () => {
 			localStorage.setItem('uploadedImages', JSON.stringify(uploadedImages))
 		}
 	}, [uploadedImages])
+
+	const openSlideshowModal = (index: number) => {
+		openModal(
+			<Slideshow
+				onClose={closeModal}
+				curentIndex={index}
+				images={uploadedImages}
+			/>
+		)
+	}
 
 	return (
 		<main className="flex flex-col mb-10">
@@ -112,6 +123,7 @@ export const Home: FC = () => {
 												localStorage.clear()
 											}
 										}}
+										onSlideshowOpen={() => openSlideshowModal(index)}
 									/>
 								</div>
 							))

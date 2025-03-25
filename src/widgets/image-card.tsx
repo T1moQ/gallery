@@ -3,7 +3,6 @@ import dummyImage from '../../public/img-dummy.png'
 import { Edit } from '../shared/icons/edit'
 import cn from 'classnames'
 import { Trash } from '../shared/icons/trash'
-import { useModal } from '../shared/hooks/use-modal'
 
 type ImageCardProps = {
 	src?: string
@@ -12,6 +11,7 @@ type ImageCardProps = {
 	onDelete?: () => void
 	onTitleChange?: (title: string) => void
 	onDescriptionChange?: (description: string) => void
+	onSlideshowOpen?: (index: number) => void
 }
 
 export const ImageCard: FC<ImageCardProps> = ({
@@ -21,11 +21,10 @@ export const ImageCard: FC<ImageCardProps> = ({
 	onDelete,
 	onDescriptionChange,
 	onTitleChange,
+	onSlideshowOpen,
 }) => {
 	const [isTitleEdit, setIsTitleEdit] = useState(false)
 	const [isDescriptionEdit, setisDescriptionEdit] = useState(false)
-
-	const { openModal } = useModal()
 
 	const titleCahngeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const newTitle = event.target.value
@@ -50,10 +49,6 @@ export const ImageCard: FC<ImageCardProps> = ({
 		setisDescriptionEdit(!isDescriptionEdit)
 	}
 
-	const viewSlideshowHandler = () => {
-		openModal(<img src={src} />)
-	}
-
 	return (
 		<div className="md:w-[400px] md:h-[420px] w-72 h-80 flex flex-col gap-3 rounded-lg shadow-lg p-3">
 			<div className="overflow-hidden relative group">
@@ -70,7 +65,7 @@ export const ImageCard: FC<ImageCardProps> = ({
 						<Trash className="!w-7 !h-7 fill-white" />
 					</button>
 					<button
-						onClick={viewSlideshowHandler}
+						onClick={() => onSlideshowOpen?.(0)}
 						className="cursor-pointer text-white"
 					>
 						Full Screen
