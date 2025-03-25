@@ -62,6 +62,7 @@ export const Home: FC = () => {
 				onClose={closeModal}
 				curentIndex={index}
 				images={uploadedImages}
+				onNavigate={(newIndex) => openSlideshowModal(newIndex)}
 			/>
 		)
 	}

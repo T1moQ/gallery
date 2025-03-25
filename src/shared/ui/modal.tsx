@@ -19,7 +19,7 @@ export const Modal: FC<PropsWithChildren> = ({ children }) => {
 				onClick={onBackdropClick}
 				className="w-full h-screen bg-gray-400/50 flex justify-center items-center"
 			>
-				<div className="p-4 bg-white rounded-xl md:flex flex-col hidden">
+				<div className="p-4 w-[90vw] max-w-[800px] h-[90vh] max-h-[600px] bg-white rounded-xl md:flex flex-col justify-center items-center hidden">
 					{children}
 				</div>
 
