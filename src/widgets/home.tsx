@@ -3,7 +3,7 @@ import { Button } from '../shared/ui/button'
 import { ImageCard } from './image-card'
 import { useModal } from '../shared/hooks/use-modal'
 import { UploaderForm } from './uploader-form'
-import { Slideshow } from './Slideshow'
+import { Slideshow } from './slideshow'
 
 export type ImageData = {
 	preview: string
