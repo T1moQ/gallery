@@ -67,7 +67,7 @@ export const ImageCard: FC<ImageCardProps> = ({
 					</button>
 					<button
 						onClick={() => onSlideshowOpen?.(0)}
-						className="absolute top-18 right-2 cursor-pointer border border-white p-1 rounded-full hover:bg-zinc-700 hover:border-zinc-700"
+						className="absolute top-14 right-2 cursor-pointer border border-white p-1 rounded-full hover:bg-zinc-700 hover:border-zinc-700"
 					>
 						<Full className="!w-7 !h-7 fill-white" />
 					</button>
