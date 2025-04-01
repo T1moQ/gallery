@@ -18,12 +18,16 @@ export const Slideshow: FC<SlideshowProps> = ({
 	const prevImg = () => {
 		if (curentIndex > 0) {
 			onNavigate(curentIndex - 1)
+		} else {
+			onNavigate(images.length - 1)
 		}
 	}
 
 	const nextImg = () => {
 		if (curentIndex < images.length - 1) {
 			onNavigate(curentIndex + 1)
+		} else {
+			onNavigate(0)
 		}
 	}
 
