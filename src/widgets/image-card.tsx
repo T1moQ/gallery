@@ -3,6 +3,7 @@ import dummyImage from '../../public/img-dummy.png'
 import { Edit } from '../shared/icons/edit'
 import cn from 'classnames'
 import { Trash } from '../shared/icons/trash'
+import { Full } from '../shared/icons/full'
 
 type ImageCardProps = {
 	src?: string
@@ -66,9 +67,9 @@ export const ImageCard: FC<ImageCardProps> = ({
 					</button>
 					<button
 						onClick={() => onSlideshowOpen?.(0)}
-						className="cursor-pointer text-white"
+						className="absolute top-18 right-2 cursor-pointer border border-white p-1 rounded-full hover:bg-zinc-700 hover:border-zinc-700"
 					>
-						Full Screen
+						<Full className="!w-7 !h-7 fill-white" />
 					</button>
 				</div>
 			</div>
