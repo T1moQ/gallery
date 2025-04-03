@@ -39,20 +39,26 @@ export const Slideshow: FC<SlideshowProps> = ({
 			>
 				<Close />
 			</button>
-			<div className="flex-1 flex items-center justify-center ">
+			<div className="flex-1 flex items-center justify-center p-4">
 				<img
 					src={images[curentIndex].preview}
 					alt=""
-					className="max-w-[80%] max-h-[80%] object-contain transition-transform duration-300 border-4 rounded-2xl border-zinc-400"
+					className="max-w-[80%] max-h-[80%] object-contain transition-transform duration-300 rounded-2xl bg-white"
 				/>
 			</div>
 			<div className="absolute top-1/2 left-4 -translate-y-1/2">
-				<button className="cursor-pointer w-12 h-12" onClick={prevImg}>
+				<button
+					className="cursor-pointer w-12 h-12 hover:scale-130"
+					onClick={prevImg}
+				>
 					<Chevrone className="rotate-90 w-full h-full" />
 				</button>
 			</div>
 			<div className="absolute top-1/2 right-4 -translate-y-1/2">
-				<button className="cursor-pointer w-12 h-12" onClick={nextImg}>
+				<button
+					className="cursor-pointer w-12 h-12 hover:scale-130"
+					onClick={nextImg}
+				>
 					<Chevrone className="rotate-270 w-full h-full" />
 				</button>
 			</div>

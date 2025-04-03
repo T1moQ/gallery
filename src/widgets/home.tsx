@@ -23,7 +23,8 @@ export const Home: FC = () => {
 					console.log('New images uploaded:', images)
 					setUploadedImages((prev) => [...prev, ...images])
 				}}
-			/>
+			/>,
+			false
 		)
 	}
 
@@ -63,7 +64,8 @@ export const Home: FC = () => {
 				curentIndex={index}
 				images={uploadedImages}
 				onNavigate={(newIndex) => openSlideshowModal(newIndex)}
-			/>
+			/>,
+			true
 		)
 	}
 
